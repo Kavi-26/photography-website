@@ -1,84 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/pagination';
-import styles from './Hero.module.css';
-
-const slides = [
-  {
-    image: '/images/hero-1.jpg',
-    tagline: 'Pre Wedding / Engagement Shots',
-    heading: 'Photography for\nAdventurous Souls &\nRebels at Heart',
-    cta: 'Discover More',
-    to: '/couples',
-  },
-  {
-    image: '/images/hero-2.jpg',
-    tagline: 'Reception Portraits',
-    heading: 'Eternal Embrace...',
-    cta: 'Read More',
-    to: '/weddings',
-  },
-  {
-    image: '/images/hero-3.jpg',
-    tagline: 'Tradition',
-    heading: 'Two souls. Two garlands.\nOne promise, held still.',
-    cta: null,
-    to: '/weddings',
-  },
-];
+import { home } from '../data/images';
 
 const pad = (n) => String(n).padStart(2, '0');
 
-const Hero = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const slide = slides[activeIndex];
+export default function Hero() {
+  const [index, setIndex] = useState(0);
+  const slide = home.slides[index];
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % home.slides.length), 6500);
+    return () => clearInterval(id);
+  }, []);
+
+  const go = (dir) => setIndex((i) => (i + dir + home.slides.length) % home.slides.length);
 
   return (
-    <section id="home" className={styles.hero}>
-      <Swiper
-        modules={[Autoplay, EffectFade, Pagination]}
-        effect="fade"
-        fadeEffect={{ crossFade: true }}
-        speed={1400}
-        autoplay={{ delay: 5600, disableOnInteraction: false }}
-        pagination={{ clickable: true, el: `.${styles.pagination}` }}
-        loop
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-        className={styles.swiperContainer}
-      >
-        {slides.map((item) => (
-          <SwiperSlide key={item.image}>
-            <div
-              className={styles.slideBg}
-              style={{ backgroundImage: `url(${item.image})` }}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      <div className={styles.overlay} />
-
-      <div className={styles.heroContent} key={activeIndex}>
-        <p className={styles.tagline}>{slide.tagline}</p>
-        <h1 className={styles.heading}>{slide.heading}</h1>
-        {slide.cta && (
-          <Link to={slide.to} className="btn-cta">{slide.cta}</Link>
-        )}
+    <section className="hero" aria-label="Featured photographs">
+      {home.slides.map((item, i) => (
+        <div className={`hero-slide ${i === index ? 'on' : ''}`} key={item.image}>
+          <div className="hero-photo" style={{ backgroundImage: `url(${item.image})`, backgroundPosition: item.position }} />
+        </div>
+      ))}
+      <div className="hero-copy" key={slide.title || slide.subtitle}>
+        <div className="hero-left">
+          {slide.title && <h1>{slide.title}</h1>}
+          {slide.cta && <Link to={slide.to} className="ps-button">{slide.cta}</Link>}
+        </div>
+        <p className="hero-side">{slide.subtitle}</p>
       </div>
-
-      <div className={styles.counter}>
-        <span>{pad(activeIndex + 1)}</span>
-        <i />
-        <span>{pad(slides.length)}</span>
-      </div>
-
-      <div className={styles.pagination} />
+      <div className="hero-line" />
+      <button type="button" className="hero-edge prev" onClick={() => go(-1)} aria-label="Previous slide">←</button>
+      <div className="hero-nav">{pad(index + 1)} <span>/</span> {pad(home.slides.length)}</div>
+      <button type="button" className="hero-edge next" onClick={() => go(1)} aria-label="Next slide">→</button>
     </section>
   );
-};
-
-export default Hero;
+}

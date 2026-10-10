@@ -1,83 +1,80 @@
 import { useState } from 'react';
-import Reveal from '../components/Reveal';
-import styles from './ContactPage.module.css';
+import CallToAction from '../components/CallToAction';
+
+const CDN = 'https://images-pw.pixieset.com';
 
 const steps = [
   {
-    n: '01',
-    title: 'The plan',
-    text: 'After you write, we talk through the day, the place, and what you want kept. A quote follows, then a contract, then the details.',
+    price: 'step 01',
+    title: 'The Plan',
+    text: 'After you submit a message, I’ll reach out to you. We’ll meet or have a call to discuss your vision, location and wants. We’ll send our quote and once you confirm & sign a contract. Let\'s start planning all the details.',
+    image: `${CDN}/elementfield/0JVadDO/_DSC2657-6996b778-2500.jpg`,
   },
   {
-    n: '02',
-    title: 'The event',
-    text: 'We arrive ready. The schedule is already set, so your job is to be in the room and let the day happen.',
+    price: 'step 02',
+    title: 'The Event',
+    text: 'We will arrive & be ready at the location on or before the said time. we’ll have everything planned ahead of time, all you have to do is have fun, enjoy every moment and be yourselves.',
+    image: `${CDN}/elementfield/M5xQXLW/NIR01748-c13f7d44-2500.jpg`,
+    flip: true,
   },
   {
-    n: '03',
-    title: 'The memories',
-    text: 'A first set of highlights comes early. The full gallery follows, and album frames are chosen from that gallery before anything is printed.',
+    price: 'step 03',
+    title: 'The Memories',
+    text: 'You\'ll get your first set of highlights  within 2 weeks. A full gallery will follow with 4 weeks after. You will be able to select pictures for album straight from your gallery; which then will be drafted and sent to you for final approval before printing.',
+    image: `${CDN}/elementfield/yr1JvGZ/KAR00936-052f3223-2500.jpg`,
   },
 ];
 
-const ContactPage = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+export default function ContactPage() {
   const [sent, setSent] = useState(false);
 
-  const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setSent(true);
-  };
-
   return (
-    <article className={styles.page}>
-      <header className={styles.hero}>
-        <Reveal>
-          <h1>Your story is as unique as you</h1>
-          <p>Say hello, and we can start turning it into pictures.</p>
-        </Reveal>
-      </header>
-
-      <section className={styles.formSection}>
+    <article className="page">
+      <CallToAction
+        image={`${CDN}/elementfield/OAoYXbP/Arshadxnyla146of886-9e8672b3-2500.jpg`}
+        title="Your story is as unique as, You"
+        subtitle="Let’s turn your story into stunning visuals, Say hello, and let’s get started!."
+        cta=""
+        position="51% 66%"
+        flush
+      />
+      <section className="form-band">
         {sent ? (
-          <p className={styles.thanks}>Message received. I’ll write back shortly.</p>
+          <p className="center-copy">Thank you for contacting me!</p>
         ) : (
-          <form onSubmit={onSubmit} className={styles.form}>
-            <label>
-              Name *
-              <input name="name" required value={form.name} onChange={onChange} />
+          <form className="form" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+            <label>Name *
+              <input name="name" required />
             </label>
-            <label>
-              Email address *
-              <input name="email" type="email" required value={form.email} onChange={onChange} />
+            <label>Email address *
+              <input name="email" type="email" required />
             </label>
-            <label>
-              Message *
-              <textarea name="message" required rows={6} value={form.message} onChange={onChange} />
+            <label>Message *
+              <textarea name="message" rows={2} required />
             </label>
-            <button type="submit" className="btn-cta">Send message</button>
+            <button className="ps-button" type="submit">Send Message</button>
           </form>
         )}
       </section>
-
-      <section className={styles.steps}>
-        <p className={styles.kicker}>What’s next?</p>
-        <div className={styles.stepGrid}>
-          {steps.map((step, i) => (
-            <Reveal key={step.n} delay={i * 0.08}>
-              <article>
-                <span>{step.n}</span>
-                <h2>{step.title}</h2>
+      <section className="section">
+        <p className="eyebrow pack-kicker">what’s next?</p>
+        <div className="steps">
+          {steps.map((step) => (
+            <article className={`step ${step.flip ? 'flip' : ''}`} key={step.title}>
+              <div className="step-head">
+                <h3>{step.title}</h3>
+                <p className="price">{step.price}</p>
+              </div>
+              <img src={step.image} alt="" />
+              <div>
+                <h3 className="below">{step.title}</h3>
+                <p className="price below">{step.price}</p>
                 <p>{step.text}</p>
-              </article>
-            </Reveal>
+              </div>
+            </article>
           ))}
         </div>
       </section>
     </article>
   );
-};
-
-export default ContactPage;
+}

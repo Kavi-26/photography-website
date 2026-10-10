@@ -1,116 +1,210 @@
-.ctaSection {
-  position: relative;
-  min-height: 72vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.footer {
+  background-color: var(--primary-background);
+  border-top: 1px solid var(--primary-details);
+  padding-top: 50px;
+  padding-bottom: 40px;
+}
+
+.igHeader {
   text-align: center;
-  overflow: hidden;
+  margin-bottom: 24px;
 }
 
-.ctaBg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center 40%;
-  transform: scale(1.08);
-  z-index: 0;
-}
-
-.ctaOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(16, 14, 12, 0.46);
-  z-index: 1;
-}
-
-.ctaContent {
-  position: relative;
-  z-index: 2;
-  color: #fff;
-  padding: 80px 24px;
-  max-width: 860px;
-}
-
-.ctaTagline {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
-  margin-bottom: 22px;
-}
-
-.ctaHeading {
+.handleLink {
   font-family: var(--font-serif);
-  font-weight: 400;
-  font-style: italic;
-  font-size: clamp(2.8rem, 6vw, 4.8rem);
-  line-height: 1.08;
-  margin-bottom: 36px;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  color: var(--primary-headings);
+  text-decoration: none;
+  transition: color 0.25s ease;
 }
 
-.instaGrid {
+.handleLink:hover {
+  color: #C18F72;
+}
+
+/* 7-Photo Horizontal Strip */
+.igGrid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 0 6px;
 }
 
-.instaCell {
+.igCell {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 1/1;
   overflow: hidden;
   display: block;
 }
 
-.instaCell img {
+.igImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.4s ease;
 }
 
-.instaCell:hover img {
-  transform: scale(1.08);
-}
-
-.instaOverlay {
+.igOverlay {
   position: absolute;
   inset: 0;
+  background: rgba(163, 106, 72, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.3s ease;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.instaCell:hover .instaOverlay {
-  background: rgba(0, 0, 0, 0.38);
+.igCell:hover .igImg {
+  transform: scale(1.08);
 }
 
-.footerBottom {
-  background: var(--bg-light);
-  padding: 42px 24px 36px;
-  text-align: center;
+.igCell:hover .igOverlay {
+  opacity: 1;
 }
 
-.handle {
-  display: inline-block;
-  letter-spacing: 0.18em;
-  text-transform: lowercase;
-  font-size: 0.85rem;
-  margin-bottom: 10px;
+/* Footer Navigation Row */
+.menuRow {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--primary-details);
 }
 
-.handle:hover {
-  color: var(--accent-gold);
+.footerNav {
+  display: flex;
+  justify-content: center;
 }
 
-.copyright {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: var(--text-light);
+.navList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-@media (max-width: 800px) {
-  .instaGrid { grid-template-columns: repeat(3, 1fr); }
+.navItem {
+  position: relative;
+}
+
+.navLink {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary-headings);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #C18F72;
+}
+
+.footerDropdown {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background-color: #FFFDF8;
+  border: 1px solid var(--primary-details);
+  padding: 10px 0;
+  min-width: 240px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+  z-index: 10;
+}
+
+.navItem:hover .footerDropdown {
+  display: block;
+}
+
+.footerDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.subLink {
+  display: block;
+  padding: 8px 18px;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--primary-paragraphs);
+  text-decoration: none;
+}
+
+.subLink:hover {
+  background-color: var(--accent-background);
+  color: var(--primary-headings);
+}
+
+/* Bottom Row */
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+
+.copyright p {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--primary-paragraphs);
+  margin: 0;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.socialLink {
+  color: var(--button-background);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.socialLink:hover {
+  color: var(--button-background-hover);
+  transform: translateY(-2px);
+}
+
+.scrollTopBtn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--primary-details);
+  background: transparent;
+  color: var(--primary-headings);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.scrollTopBtn:hover {
+  background-color: var(--button-background-hover);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .igGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .navList {
+    gap: 18px;
+  }
+  .bottomRow {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
 }

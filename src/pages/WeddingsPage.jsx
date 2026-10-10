@@ -1,23 +1,32 @@
-import GalleryPage from '../components/GalleryPage';
+import Filmstrip from '../components/Filmstrip';
+import Quote from '../components/Quote';
+import CallToAction from '../components/CallToAction';
+import { galleries, seaCta } from '../data/images';
 
-const images = [
-  '/images/wed-1.jpg',
-  '/images/wed-3.jpg',
-  '/images/wed-4.jpg',
-  '/images/hero-2.jpg',
-  '/images/story-6.jpg',
-  '/images/story-7.jpg',
-  '/images/hero-3.jpg',
-  '/images/story-3.jpg',
-];
+const images = [galleries.weddings.banner, ...galleries.weddings.images];
 
-const WeddingsPage = () => (
-  <GalleryPage
-    kicker="Portfolio"
-    title="Weddings / reception"
-    intro="From a full family celebration to a smaller ceremony. The work is to stay close, stay quiet, and keep the day moving for you."
-    images={images}
-  />
-);
-
-export default WeddingsPage;
+export default function WeddingsPage() {
+  return (
+    <article className="page">
+      <section className="section">
+        <div className="center-copy prose">
+          <h1>Weddings/ Reception</h1>
+          <p>From big vibrant Tamil weddings, to cozy, candlelit wedding ceremonies. Love is beautiful, and there are so many ways it can be captured, through a hug, a kiss, a stare, a wink. All I ask my clients is to trust me with their memories, and allow themselves to fully enjoy the day.</p>
+        </div>
+      </section>
+      <Filmstrip images={images} fit="wide" />
+      <Quote
+        quote="For it was not into my ear you whispered, but into my heart. It was not my lips you kissed, but my soul."
+        source="Gabriel S."
+      />
+      <CallToAction
+        image={seaCta}
+        title="Are you ready for your Adventure? Let’s do it!"
+        subtitle="......"
+        cta="Contact Me"
+        short
+        position="50% 50%"
+      />
+    </article>
+  );
+}

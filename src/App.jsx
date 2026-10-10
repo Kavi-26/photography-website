@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SiteMotion from './components/SiteMotion';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
+import PortfolioPage from './pages/PortfolioPage';
 import InvestmentPage from './pages/InvestmentPage';
 import ExperiencePage from './pages/ExperiencePage';
 import CouplesPage from './pages/CouplesPage';
@@ -31,40 +33,28 @@ const ScrollToTop = () => {
   return null;
 };
 
-const PageFrame = ({ children }) => {
-  const { pathname } = useLocation();
-  return (
-    <AnimatePresence mode="wait">
-      <motion.main
-        key={pathname}
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {children}
-      </motion.main>
-    </AnimatePresence>
-  );
-};
-
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Navbar />
-      <Routes>
-        <Route path="/" element={<PageFrame><HomePage /></PageFrame>} />
-        <Route path="/about" element={<PageFrame><AboutPage /></PageFrame>} />
-        <Route path="/contact" element={<PageFrame><ContactPage /></PageFrame>} />
-        <Route path="/blog" element={<PageFrame><BlogPage /></PageFrame>} />
-        <Route path="/investment" element={<PageFrame><InvestmentPage /></PageFrame>} />
-        <Route path="/experience" element={<PageFrame><ExperiencePage /></PageFrame>} />
-        <Route path="/couples" element={<PageFrame><CouplesPage /></PageFrame>} />
-        <Route path="/weddings" element={<PageFrame><WeddingsPage /></PageFrame>} />
-        <Route path="/elopements" element={<PageFrame><ElopementsPage /></PageFrame>} />
-        <Route path="/adventure" element={<PageFrame><AdventurePage /></PageFrame>} />
-      </Routes>
+      <SiteMotion />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/investment" element={<InvestmentPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/couples" element={<CouplesPage />} />
+          <Route path="/weddings" element={<WeddingsPage />} />
+          <Route path="/elopements" element={<ElopementsPage />} />
+          <Route path="/adventure" element={<AdventurePage />} />
+        </Routes>
+      </main>
       <Footer />
     </BrowserRouter>
   );

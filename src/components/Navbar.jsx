@@ -1,208 +1,126 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
-import styles from './Navbar.module.css';
+import { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { logo } from '../data/images';
 
-const navItems = [
-  { label: 'HOME', to: '/' },
+const items = [
+  { label: 'Home', to: '/' },
   {
-    label: 'PORTFOLIO',
+    label: 'Portfolio',
+    to: '/portfolio',
     dropdown: [
       { label: 'Couple Portraits/ Pre wedding', to: '/couples' },
       { label: 'Weddings/ Reception', to: '/weddings' },
       { label: 'Food Photography', to: '/elopements' },
       { label: 'Equestrian Photography', to: '/adventure' },
-    ]
+    ],
   },
   {
-    label: 'INFO',
+    label: 'Info',
     dropdown: [
       { label: 'Investment', to: '/investment' },
       { label: 'Experience', to: '/experience' },
-    ]
+    ],
   },
-  { label: 'ABOUT', to: '/about' },
-  { label: 'CONTACT', to: '/contact' },
-  { label: 'BLOG', to: '/blog' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'Blog', to: '/blog' },
 ];
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileExpanded, setMobileExpanded] = useState(null);
-  const navRef = useRef(null);
+export default function Navbar() {
   const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(null);
+  const solid = location.pathname !== '/';
 
   useEffect(() => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
-    setMobileExpanded(null);
+    setOpen(false);
+    setExpanded(null);
   }, [location.pathname]);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setOpenDropdown(null);
-        setMobileOpen(false);
-      }
-    };
-    const handleKey = (e) => {
-      if (e.key === 'Escape') {
-        setOpenDropdown(null);
-        setMobileOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleKey);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleKey);
-    };
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
+  }, [open]);
 
-  const isHome = location.pathname === '/';
-  const forceSolid = !isHome;
-  const isChildActive = (item) => item.dropdown?.some((sub) => sub.to === location.pathname);
+  const childActive = (item) => item.dropdown?.some((sub) => location.pathname === sub.to);
 
   return (
-    <nav
-      ref={navRef}
-      className={`${styles.navbar} ${(scrolled || forceSolid) ? styles.scrolled : ''}`}
-    >
-      <Link to="/" className={styles.logo}>
-        <div className={styles.logoIcon}>
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="1" width="11" height="11" stroke="#C4973B" strokeWidth="1.5"/>
-            <rect x="16" y="1" width="11" height="11" stroke="#C4973B" strokeWidth="1.5"/>
-            <rect x="1" y="16" width="11" height="11" stroke="#C4973B" strokeWidth="1.5"/>
-            <rect x="16" y="16" width="11" height="11" stroke="#C4973B" strokeWidth="1.5" strokeDasharray="2 2"/>
-          </svg>
+    <>
+      <header className={`kk-nav ${solid ? 'solid' : ''} ${scrolled ? 'scrolled' : ''}`}>
+        <div className="kk-nav-inner">
+          <Link to="/" className="kk-logo" aria-label="Karakovan Photography">
+            <img src={logo} alt="Karakovan Photography" />
+          </Link>
+          <ul className="kk-links">
+            {items.map((item) => (
+              <li key={item.label} className={item.dropdown ? 'kk-drop' : undefined}>
+                {item.dropdown ? (
+                  <>
+                    {item.to ? (
+                      <NavLink to={item.to} className={() => (childActive(item) ? 'active' : '')}>
+                        {item.label} <span className="kk-caret" />
+                      </NavLink>
+                    ) : (
+                      <button type="button" className={childActive(item) ? 'active' : ''}>
+                        {item.label} <span className="kk-caret" />
+                      </button>
+                    )}
+                    <div className="kk-menu">
+                      {item.dropdown.map((sub) => (
+                        <NavLink key={sub.to} to={sub.to}>{sub.label}</NavLink>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <NavLink to={item.to} end={item.to === '/'} className={({ isActive }) => (isActive ? 'kk-link active' : 'kk-link')}>
+                    {item.label}
+                  </NavLink>
+                )}
+              </li>
+            ))}
+          </ul>
+          <button className="kk-burger" aria-label="Open menu" onClick={() => setOpen(true)}>
+            <span />
+          </button>
         </div>
-        <div className={styles.logoText}>
-          <span className={styles.logoName}>KARAKOVAN</span>
-          <span className={styles.logoSub}>PHOTOGRAPHY</span>
-        </div>
-      </Link>
+      </header>
 
-      <ul className={styles.navLinks}>
-        {navItems.map((item) => (
-          <li
-            key={item.label}
-            className={`${styles.navItem} ${item.dropdown ? styles.hasDropdown : ''}`}
-            onMouseEnter={() => item.dropdown && setOpenDropdown(item.label)}
-            onMouseLeave={() => item.dropdown && setOpenDropdown(null)}
-          >
-            {item.dropdown ? (
-              <button
-                type="button"
-                className={`${styles.navLink} ${styles.navButton} ${isChildActive(item) ? styles.activeLink : ''}`}
-                aria-haspopup="true"
-                aria-expanded={openDropdown === item.label}
-                onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-              >
-                {item.label}
-                <span className={`${styles.caret} ${openDropdown === item.label ? styles.caretOpen : ''}`}>▾</span>
-              </button>
-            ) : (
-              <NavLink
-                to={item.to}
-                end={item.to === '/'}
-                className={({ isActive }) => `${styles.navLink} ${isActive ? styles.activeLink : ''}`}
-              >
-                {item.label}
-              </NavLink>
-            )}
-
-            {item.dropdown && (
-              <ul className={`${styles.dropdown} ${openDropdown === item.label ? styles.dropdownOpen : ''}`}>
-                {item.dropdown.map((sub) => (
-                  <li key={sub.label}>
-                    <NavLink
-                      to={sub.to}
-                      className={({ isActive }) => `${styles.dropdownLink} ${isActive ? styles.dropdownActive : ''}`}
-                      onClick={() => setOpenDropdown(null)}
-                    >
-                      {sub.label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-
-      <button
-        className={styles.hamburger}
-        onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label="Toggle menu"
-        aria-expanded={mobileOpen}
-      >
-        <span className={`${styles.bar} ${mobileOpen ? styles.bar1Open : ''}`} />
-        <span className={`${styles.bar} ${mobileOpen ? styles.bar2Open : ''}`} />
-        <span className={`${styles.bar} ${mobileOpen ? styles.bar3Open : ''}`} />
-      </button>
-
-      <div
-        className={`${styles.mobileBackdrop} ${mobileOpen ? styles.mobileBackdropOpen : ''}`}
-        onClick={() => setMobileOpen(false)}
-      />
-
-      <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}>
-        <button className={styles.mobileClose} onClick={() => setMobileOpen(false)} aria-label="Close menu">✕</button>
-        {navItems.map((item) => (
+      <div className={`kk-overlay ${open ? 'open' : ''}`}>
+        <button className="kk-overlay-close" onClick={() => setOpen(false)} aria-label="Close menu">✕</button>
+        {items.map((item) => (
           <div key={item.label}>
             {item.dropdown ? (
               <>
                 <button
                   type="button"
-                  className={`${styles.mobileLink} ${styles.mobileToggle} ${isChildActive(item) ? styles.mobileActive : ''}`}
-                  aria-expanded={mobileExpanded === item.label}
-                  onClick={() => setMobileExpanded(mobileExpanded === item.label ? null : item.label)}
+                  className="kk-ov-link"
+                  onClick={() => setExpanded(expanded === item.label ? null : item.label)}
                 >
-                  {item.label}
-                  <span className={`${styles.caret} ${mobileExpanded === item.label ? styles.caretOpen : ''}`}>▾</span>
+                  {item.label} <span>{expanded === item.label ? '–' : '+'}</span>
                 </button>
-                <div className={`${styles.mobileSubList} ${mobileExpanded === item.label ? styles.mobileSubListOpen : ''}`}>
-                  {item.dropdown.map((sub) => (
-                    <NavLink
-                      key={sub.label}
-                      to={sub.to}
-                      className={({ isActive }) => `${styles.mobileSub} ${isActive ? styles.mobileActive : ''}`}
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {sub.label}
-                    </NavLink>
-                  ))}
-                </div>
+                {expanded === item.label && (
+                  <div className="kk-sub">
+                    {item.to && <Link to={item.to} onClick={() => setOpen(false)}>All {item.label}</Link>}
+                    {item.dropdown.map((sub) => (
+                      <Link key={sub.to} to={sub.to} onClick={() => setOpen(false)}>{sub.label}</Link>
+                    ))}
+                  </div>
+                )}
               </>
             ) : (
-              <NavLink
-                to={item.to}
-                end={item.to === '/'}
-                className={({ isActive }) => `${styles.mobileLink} ${isActive ? styles.mobileActive : ''}`}
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.label}
-              </NavLink>
+              <Link to={item.to} onClick={() => setOpen(false)}>{item.label}</Link>
             )}
           </div>
         ))}
       </div>
-    </nav>
+    </>
   );
-};
-
-export default Navbar;
+}

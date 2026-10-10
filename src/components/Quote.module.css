@@ -1,25 +1,30 @@
-.section {
-  background: var(--bg-cream);
+.quoteSection {
+  padding: clamp(60px, 8vw, 100px) 0 40px;
+  background-color: var(--primary-background);
   text-align: center;
-  padding: 120px 8vw;
 }
 
-.section blockquote {
+.inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.quoteText {
   font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  color: var(--primary-headings);
   line-height: 1.35;
-  max-width: 900px;
-  margin: 0 auto 22px;
-  color: var(--text-dark);
+  margin-bottom: 20px;
 }
 
-.section cite {
-  font-family: var(--font-sans);
+.quoteSource {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.15em;
+  color: var(--primary-headings);
   font-style: normal;
-  letter-spacing: 0.28em;
   text-transform: uppercase;
-  font-size: 0.68rem;
-  color: var(--accent-olive);
 }

@@ -1,21 +1,33 @@
-import GalleryPage from '../components/GalleryPage';
+import { useState } from 'react';
+import { galleries, couplesBanner } from '../data/images';
 
-const images = [
-  '/images/story-1.jpg',
-  '/images/story-2.jpg',
-  '/images/story-5.jpg',
-  '/images/story-8.jpg',
-  '/images/hero-1.jpg',
-  '/images/wed-2.jpg',
-];
+export default function CouplesPage() {
+  const [open, setOpen] = useState(null);
+  const images = galleries.couples.images.filter((src) => src !== couplesBanner);
 
-const CouplesPage = () => (
-  <GalleryPage
-    kicker="Portfolio"
-    title="Couple portraits / pre wedding"
-    intro="A session for the two of you, before the crowd arrives. Pick a place that already feels like the relationship, and we will build the pictures around that."
-    images={images}
-  />
-);
-
-export default CouplesPage;
+  return (
+    <article className="page">
+      <section className="banner split">
+        <img src={couplesBanner} alt="" style={{ objectPosition: '50% 50%' }} />
+        <div className="tint" />
+        <div className="banner-copy">
+          <h1>Couple Portraits/ Pre wedding</h1>
+          <p>You don’t need a big, special occasion to celebrate each other and document your relationship. Pick a location and let’s start planning a marvelous photoshoot. Couple shoot is my fav of all.</p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="masonry">
+          {images.map((src) => (
+            <img key={src} src={src} alt="" onClick={() => setOpen(src)} />
+          ))}
+        </div>
+      </section>
+      {open && (
+        <div className="lightbox-overlay" onClick={() => setOpen(null)}>
+          <button className="lightbox-close" type="button" aria-label="Close">✕</button>
+          <img className="lightbox-content" src={open} alt="" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
+    </article>
+  );
+}

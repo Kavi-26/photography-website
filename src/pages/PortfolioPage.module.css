@@ -1,0 +1,149 @@
+.portfolioPage {
+  background-color: var(--primary-background);
+  padding-top: 130px;
+  padding-bottom: 90px;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding-bottom: clamp(40px, 6vw, 70px);
+}
+
+.pageTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--primary-headings);
+  margin-bottom: 12px;
+}
+
+.pageSubtitle {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-paragraphs);
+  margin-bottom: 30px;
+}
+
+.quoteWrap {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  border-top: 1px solid var(--primary-details);
+  border-bottom: 1px solid var(--primary-details);
+}
+
+.quoteText {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+  font-style: italic;
+  color: var(--primary-headings);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.quoteAuthor {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-paragraphs);
+}
+
+.gridSection {
+  padding-top: 20px;
+}
+
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(24px, 4vw, 50px);
+}
+
+.categoryCard {
+  display: block;
+  text-decoration: none;
+  background-color: var(--accent-background);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+.categoryCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.09);
+}
+
+.cardImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.categoryCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(20, 20, 18, 0.3) 100%
+  );
+}
+
+.cardInfo {
+  padding: 30px 24px 24px;
+  text-align: center;
+}
+
+.cardSubtitle {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--primary-paragraphs);
+  margin-bottom: 10px;
+}
+
+.cardTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+  font-weight: 400;
+  color: var(--primary-headings);
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+
+.viewLink {
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--button-background);
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.categoryCard:hover .viewLink {
+  color: var(--button-background-hover);
+}
+
+@media (max-width: 768px) {
+  .categoriesGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-ssr
+downloaded_products
+.git
+public/photos/**/*.jpg
+public/photos/**/*.jpeg
+public/photos/**/*.png
+public/photos/**/*.webp
+*.csv

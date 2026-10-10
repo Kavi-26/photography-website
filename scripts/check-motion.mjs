@@ -1,0 +1,95 @@
+import { spawn } from 'child_process';
+import { setTimeout as delay } from 'timers/promises';
+
+const proc = spawn('C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', [
+  '--headless=new',
+  '--disable-gpu',
+  '--remote-debugging-port=9223',
+  '--window-size=1440,900',
+  'about:blank',
+], { stdio: 'ignore' });
+
+await delay(900);
+const list = await fetch('http://127.0.0.1:9223/json/list').then((r) => r.json());
+const page = list.find((t) => t.type === 'page');
+const ws = new WebSocket(page.webSocketDebuggerUrl);
+let seq = 0;
+const pending = new Map();
+ws.addEventListener('message', (ev) => {
+  const msg = JSON.parse(ev.data);
+  if (msg.id && pending.has(msg.id)) {
+    pending.get(msg.id)(msg);
+    pending.delete(msg.id);
+  }
+});
+await new Promise((resolve) => ws.addEventListener('open', resolve, { once: true }));
+
+function send(method, params = {}) {
+  const id = ++seq;
+  return new Promise((resolve) => {
+    pending.set(id, resolve);
+    ws.send(JSON.stringify({ id, method, params }));
+  });
+}
+
+async function evalJs(expression) {
+  const res = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true });
+  return res.result?.result?.value ?? res.result;
+}
+
+await send('Page.enable');
+await send('Emulation.setDeviceMetricsOverride', {
+  width: 1440, height: 900, deviceScaleFactor: 1, mobile: false,
+});
+
+const probe = `(async () => {
+  const sample = (sel) => {
+    const el = document.querySelector(sel);
+    if (!el) return { sel, missing: true };
+    const style = getComputedStyle(el);
+    return {
+      sel,
+      opacity: style.opacity,
+      on: el.classList.contains('kk-anim-on'),
+      anim: el.classList.contains('kk-anim'),
+    };
+  };
+  return {
+    hero: sample('.hero h1'),
+    nav: sample('.kk-links a'),
+    below: sample('#stories h2'),
+    count: document.querySelectorAll('.kk-anim').length,
+    on: document.querySelectorAll('.kk-anim-on').length,
+  };
+})()`;
+
+async function visit(url) {
+  await send('Page.navigate', { url });
+  await delay(700);
+  return evalJs(probe);
+}
+
+const early = await visit('http://localhost:5173/');
+await delay(1600);
+const later = await evalJs(probe);
+await evalJs(`document.querySelector('#stories').scrollIntoView()`);
+await delay(400);
+const scrolled = await evalJs(probe);
+const about = await visit('http://localhost:5173/about');
+await delay(1600);
+const aboutLater = await evalJs(`({
+  h1: document.querySelector('h1') && getComputedStyle(document.querySelector('h1')).opacity,
+  anim: document.querySelectorAll('.kk-anim').length,
+  on: document.querySelectorAll('.kk-anim-on').length
+})`);
+const contact = await visit('http://localhost:5173/contact');
+await delay(500);
+const contactState = await evalJs(`({
+  label: !!document.querySelector('label.kk-anim, label'),
+  labels: document.querySelectorAll('form label.kk-anim, .page label.kk-anim').length,
+  anim: document.querySelectorAll('.kk-anim').length
+})`);
+
+console.log(JSON.stringify({ early, later, scrolled, about, aboutLater, contact, contactState }, null, 2));
+ws.close();
+proc.kill();

@@ -1,22 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-  /* Colors exact from karakovan.in */
-  --bg-cream: #F9F8F6;
-  --bg-light: #F2EFE9;
-  --bg-dark: #33332D;
-  --text-dark: #333333;
-  --text-medium: #555;
-  --text-light: #888;
-  --accent-gold: #C4973B;
-  --accent-gold-muted: #B5A68D;
-  --accent-olive: #8D8C7A;
-  --white: #FFFFFF;
-  --border-light: #e5e5e5;
+  /* Exact Colors from https://www.karakovan.in/ */
+  --primary-background: #FFFDF8;
+  --primary-headings: #A36A48;
+  --primary-paragraphs: #474842;
+  --primary-details: #E0E0D3;
+  --accent-background: #F0EFE7;
+  --accent-headings: #A36A48;
+  --accent-paragraphs: #474842;
+  --accent-details: #E0E0D3;
+  --button-background: #898970;
+  --button-text: #FFFFFF;
+  --button-background-hover: #C18F72;
+  --button-text-hover: #FFFFFF;
 
   /* Typography */
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Libre Caslon Text', 'LTC Caslon', Palatino, 'Palatino Linotype', Georgia, serif;
+  --font-sans: 'Libre Caslon Text', Palatino, Georgia, serif;
+  --nav-size: 0.8125rem;
+  --display-size: min(3.875rem, calc(1rem + 3.19vw));
+
+  /* Layout */
+  --max-page-width: 1440px;
+  --transition-smooth: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 * {
@@ -27,25 +34,40 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--primary-background);
+  color: var(--primary-paragraphs);
 }
 
 body {
-  font-family: var(--font-sans);
-  background-color: var(--bg-cream);
-  color: var(--text-dark);
-  line-height: 1.6;
+  font-family: var(--font-serif);
+  background-color: var(--primary-background);
+  color: var(--primary-paragraphs);
+  line-height: 1.8;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4.serif {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
   font-weight: 400;
+  color: var(--primary-headings);
+  line-height: 1.2;
+}
+
+p, span, li, a {
+  font-family: var(--font-serif);
+}
+
+.sans {
+  font-family: var(--font-sans) !important;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: all 0.3s ease;
+  transition: var(--transition-smooth);
 }
 
 ul {
@@ -57,72 +79,114 @@ button {
   border: none;
   background: none;
   font-family: var(--font-sans);
+  transition: var(--transition-smooth);
 }
 
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
-/* CTA Button - exact from site */
+/* Button exact styling from Karakovan.in */
+.ps-button,
+.button,
 .btn-cta {
   display: inline-block;
-  padding: 12px 28px;
-  background-color: var(--bg-dark);
-  color: var(--white);
+  padding: 0.95rem 1.7rem;
+  background-color: var(--button-background);
+  color: var(--button-text);
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.21em;
+  line-height: 1.43;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.7rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 0;
+  border: none;
+  text-align: center;
+  transition: var(--transition-smooth);
   cursor: pointer;
 }
 
+.ps-button:hover,
+.button:hover,
 .btn-cta:hover {
-  background-color: var(--accent-gold);
-  color: var(--white);
+  background-color: var(--button-background-hover);
+  color: var(--button-text-hover);
 }
 
 .btn-outline {
   display: inline-block;
-  padding: 12px 28px;
-  border: 1px solid var(--text-dark);
-  color: var(--text-dark);
+  padding: 12px 30px;
+  background: transparent;
+  color: var(--primary-headings);
+  border: 1px solid var(--primary-headings);
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.7rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  transition: all 0.3s ease;
+  transition: var(--transition-smooth);
   cursor: pointer;
 }
 
 .btn-outline:hover {
-  background: var(--text-dark);
-  color: var(--white);
+  background-color: var(--primary-headings);
+  color: #FFFFFF;
 }
 
-.section-padding {
-  padding: 100px 60px;
+/* Layout Utilities */
+.max-page-width {
+  max-width: var(--max-page-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 4vw, 60px);
+  padding-right: clamp(20px, 4vw, 60px);
 }
 
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 60px;
-}
-
-/* Image placeholder*/
-.img-placeholder {
+.decorative-line,
+.bg-line {
+  height: 1px;
+  background-color: var(--primary-details);
   width: 100%;
-  height: 100%;
-  background-color: #E2DDD7;
+  margin: 40px 0;
+}
+
+/* Lightbox Modal */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 12, 0.94);
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9a9282;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  padding: 20px;
+  cursor: zoom-out;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  cursor: default;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  color: #fff;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10000;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
 }

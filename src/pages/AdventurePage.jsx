@@ -1,19 +1,20 @@
-import GalleryPage from '../components/GalleryPage';
+import Filmstrip from '../components/Filmstrip';
+import Quote from '../components/Quote';
+import QuickLinks from '../components/QuickLinks';
+import { galleries } from '../data/images';
 
-const images = [
-  '/images/horse-1.jpg',
-  '/images/horse-2.jpg',
-  '/images/horse-3.jpg',
-  '/images/ig-4.jpg',
-];
-
-const AdventurePage = () => (
-  <GalleryPage
-    kicker="Portfolio"
-    title="Equestrian photography"
-    intro="Horse and rider, in motion and at rest. The frame has to keep both the animal and the person honest."
-    images={images}
-  />
-);
-
-export default AdventurePage;
+export default function AdventurePage() {
+  return (
+    <article className="page">
+      <section className="section page-title">
+        <h1>Adventure</h1>
+      </section>
+      <Quote
+        quote="My continuous thirst for novelty, exploration and creative challenge, took me all around the world."
+        source="enjoy these personal stories"
+      />
+      <Filmstrip images={galleries.adventure} fit="portrait" />
+      <QuickLinks band />
+    </article>
+  );
+}
