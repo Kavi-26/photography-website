@@ -1,0 +1,125 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  width: 100%;
+  overflow: hidden;
+  background: #1c1b19;
+}
+
+.swiperContainer,
+.swiperContainer :global(.swiper-slide) {
+  width: 100%;
+  height: 100%;
+}
+
+.slideBg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  animation: ken 7.2s ease-out both;
+}
+
+@keyframes ken {
+  from { transform: scale(1.14); }
+  to { transform: scale(1); }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent 32%),
+    rgba(0, 0, 0, 0.28);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  text-align: center;
+  z-index: 2;
+  width: min(920px, 90%);
+  animation: rise 0.9s ease both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translate(-50%, -40%); }
+  to { opacity: 1; transform: translate(-50%, -46%); }
+}
+
+.tagline {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 22px;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 5.6vw, 5.1rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.08;
+  white-space: pre-line;
+  margin-bottom: 36px;
+}
+
+.counter {
+  position: absolute;
+  left: 48px;
+  bottom: 36px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+}
+
+.counter i {
+  width: 42px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.7);
+  display: block;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 38px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+}
+
+:global(.swiper-pagination-bullet) {
+  background: rgba(255, 255, 255, 0.45);
+  opacity: 1;
+  border-radius: 0;
+  width: 22px;
+  height: 2px;
+  margin: 0 4px !important;
+  transition: width 0.35s ease, background 0.35s ease;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  background: #fff;
+  width: 42px;
+}
+
+@media (max-width: 700px) {
+  .counter { left: 20px; bottom: 28px; }
+  .heading { margin-bottom: 28px; }
+}

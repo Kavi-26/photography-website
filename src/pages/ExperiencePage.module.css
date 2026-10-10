@@ -1,0 +1,105 @@
+.page {
+  padding-top: 140px;
+  background: var(--bg-cream);
+}
+
+.hero {
+  padding: 10px 8vw 70px;
+  max-width: 760px;
+}
+
+.kicker {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--accent-olive);
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-weight: 400;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1.08;
+  margin-bottom: 18px;
+}
+
+.hero p {
+  color: var(--text-medium);
+  line-height: 1.85;
+  margin-bottom: 28px;
+}
+
+.banner {
+  background: var(--bg-dark);
+  color: #fff;
+  padding: 54px 8vw;
+}
+
+.banner h2 {
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  padding: 70px 8vw;
+}
+
+.grid span {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent-gold);
+  font-size: 1.4rem;
+}
+
+.grid h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.7rem;
+  margin: 8px 0 12px;
+}
+
+.grid p {
+  color: var(--text-medium);
+  line-height: 1.75;
+}
+
+.faq {
+  padding: 10px 8vw 90px;
+  max-width: 860px;
+}
+
+.faq h2 {
+  font-weight: 400;
+  font-style: italic;
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.item {
+  width: 100%;
+  text-align: left;
+  border-top: 1px solid rgba(51, 51, 45, 0.15);
+  padding: 16px 0;
+  color: var(--text-dark);
+}
+
+.item strong {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.item p {
+  margin-top: 8px;
+  color: var(--text-medium);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .page { padding-top: 110px; }
+}

@@ -1,0 +1,45 @@
+.section {
+  background: var(--bg-light);
+  padding: 100px 8vw;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 70px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent-olive);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.copy h2 {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.1;
+  margin-bottom: 22px;
+  font-weight: 400;
+}
+
+.copy p {
+  color: var(--text-medium);
+  line-height: 1.85;
+  margin-bottom: 28px;
+  max-width: 460px;
+}
+
+.photo {
+  height: 620px;
+}
+
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; gap: 36px; }
+  .photo { height: 70vw; }
+  .section { padding: 72px 24px; }
+}

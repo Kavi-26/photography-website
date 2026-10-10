@@ -1,0 +1,53 @@
+.elopementsPage {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+.heroSection {
+  display: flex;
+  padding: 12rem 10% 6rem;
+  gap: 4rem;
+}
+
+.heroCol {
+  flex: 1;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.desc {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.galleryGrid {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 5% 5rem;
+}
+
+.gridColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  .heroSection {
+    flex-direction: column;
+    padding: 8rem 5% 4rem;
+  }
+  .galleryGrid {
+    flex-direction: column;
+  }
+}

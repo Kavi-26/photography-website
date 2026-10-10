@@ -1,0 +1,116 @@
+.ctaSection {
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ctaBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 40%;
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+.ctaOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 14, 12, 0.46);
+  z-index: 1;
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding: 80px 24px;
+  max-width: 860px;
+}
+
+.ctaTagline {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 22px;
+}
+
+.ctaHeading {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  line-height: 1.08;
+  margin-bottom: 36px;
+}
+
+.instaGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.instaCell {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  display: block;
+}
+
+.instaCell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.instaCell:hover img {
+  transform: scale(1.08);
+}
+
+.instaOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.3s ease;
+}
+
+.instaCell:hover .instaOverlay {
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.footerBottom {
+  background: var(--bg-light);
+  padding: 42px 24px 36px;
+  text-align: center;
+}
+
+.handle {
+  display: inline-block;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.handle:hover {
+  color: var(--accent-gold);
+}
+
+.copyright {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+}
+
+@media (max-width: 800px) {
+  .instaGrid { grid-template-columns: repeat(3, 1fr); }
+}

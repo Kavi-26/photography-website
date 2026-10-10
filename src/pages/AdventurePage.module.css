@@ -1,0 +1,102 @@
+.adventurePage {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+.hero {
+  padding: 10rem 10% 4rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+}
+
+.quoteSection {
+  position: relative;
+  text-align: center;
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30vh;
+}
+
+.svgWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.svgWrapper svg {
+  width: 100%;
+  height: 100%;
+}
+
+.quoteContent {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.quoteContent h2 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--color-text);
+  font-style: italic;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: #777;
+  text-transform: uppercase;
+}
+
+.galleryFeature {
+  padding: 0 10% 8rem;
+}
+
+.mainImageWrapper {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Make image smaller width since it's vertical orientation on the actual site, but placeholder will scale */
+.mainImageWrapper .img-placeholder {
+  max-width: 800px; 
+}
+
+.thumbnailStrip {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+}
+
+.thumbnailStrip::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: 8rem 5% 4rem;
+  }
+  .quoteContent h2 {
+    font-size: 1.8rem;
+  }
+}
