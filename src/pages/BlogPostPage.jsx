@@ -1,14 +1,17 @@
-import { blogCompare, blogCover } from '../data/images';
+import { blogCompare, blogHero } from '../data/images';
 
 export default function BlogPostPage() {
   return (
     <article className="page post">
       <header className="post-hero">
-        <img src={blogCover} alt="" />
-        <time>April 3, 2026</time>
+        <img src={blogHero} alt="" />
+        <div className="post-copy">
+          <h1>The Subconscious Echo: When Art Emerges Unbidden</h1>
+          <time>April 3, 2026</time>
+        </div>
       </header>
       <div className="article">
-        <h1>Cinematic Pre-wedding Photography inspired by Jesse James movie</h1>
+        <h2>Cinematic Pre-wedding Photography inspired by Jesse James movie</h2>
         <p>We like to think of every piece we create as entirely original, born of a singular, distinct moment of inspiration. As a photographer, I often approach a shoot with a clear vision, but the final, most impactful images can sometimes be the ones I <em>didn&apos;t</em> plan for.</p>
         <p>Recently, I had the pleasure of photographing a wonderful couple in a vast, open landscape. The light was perfect, and the atmosphere was serene. Back at my computer, as I started to work through the collection, I pulled up a specific frame of the couple in the field. I froze.</p>
         <p>There was something profoundly familiar about the depth of that landscape, the curve of the horizon, and the way the sky seemed to hold a specific kind of weight. It wasn&apos;t just a good composition; it felt <em>cinematic</em> in a way that resonated deeply with me.</p>

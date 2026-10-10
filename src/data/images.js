@@ -155,6 +155,7 @@ export const galleries = {
 };
 
 export const blogCover = `${CDN}/page/77JXkG/POSTER-TITLEDBEACH-0a0fd348-2500.jpg`;
+export const blogHero = `${CDN}/page/77JXkG/POSTER-TITLEDBEACH-3aa035c5-1500.jpg`;
 export const blogCompare = [
   `${CDN}/elementfield/vXbJQlb/POSTER-TITLEDBEACHcopy1-aebd3f9b-1500.png`,
   `${CDN}/elementfield/wXpbaDX/INSPITRATION-poster-95ecfee0-1500.png`,

@@ -31,7 +31,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(null);
-  const solid = location.pathname !== '/';
+  const onPost = location.pathname.startsWith('/blog/');
+  const overlay = location.pathname === '/' || onPost;
 
   useEffect(() => {
     setOpen(false);
@@ -54,7 +55,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className={`kk-nav ${solid ? 'solid' : ''} ${scrolled ? 'scrolled' : ''}`}>
+      <header className={`kk-nav ${overlay ? 'overlay' : 'solid'} ${onPost ? 'on-post' : ''} ${scrolled ? 'scrolled' : ''}`}>
         <div className="kk-nav-inner">
           <Link to="/" className="kk-logo" aria-label="Karakovan Photography">
             <img src={logo} alt="Karakovan Photography" />

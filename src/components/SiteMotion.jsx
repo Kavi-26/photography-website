@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const DURATION = 1400;
-const SELECTOR = 'h1,h2,h3,h4,h5,h6,p,img,button,.ps-button,label,input,textarea,summary,blockquote,li,a';
+const SELECTOR = 'h1,h2,h3,h4,h5,h6,p,img,button,.ps-button,label,input,textarea,summary,blockquote,li,a,time';
 
 function eligible(el) {
   if (el.closest('.kk-menu, .kk-overlay, .hero-slide, .tint')) return false;
