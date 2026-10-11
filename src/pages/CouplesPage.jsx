@@ -23,9 +23,9 @@ export default function CouplesPage() {
         </div>
       </section>
       {open && (
-        <div className="lightbox-overlay" onClick={() => setOpen(null)}>
+        <div className="lightbox-overlay kk-lb-in" onClick={() => setOpen(null)}>
           <button className="lightbox-close" type="button" aria-label="Close">✕</button>
-          <img className="lightbox-content" src={open} alt="" onClick={(e) => e.stopPropagation()} />
+          <img className="lightbox-content kk-lb-img" src={open} alt="" onClick={(e) => e.stopPropagation()} />
         </div>
       )}
     </article>

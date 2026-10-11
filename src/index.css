@@ -198,13 +198,16 @@ img {
 /* Masonry images: hover zoom */
 .masonry .masonry-img {
   transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.5s ease !important;
+              box-shadow 0.5s ease,
+              filter 0.6s ease !important;
   transform-origin: center;
 }
 
+.masonry img:hover,
 .masonry .masonry-img:hover {
   transform: scale(1.025) !important;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  filter: saturate(1.06);
   z-index: 2;
   position: relative;
 }
@@ -219,8 +222,8 @@ img {
 }
 
 @keyframes kkLbImgIn {
-  from { opacity: 0; transform: scale(0.88); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(0.88); filter: blur(10px); }
+  to   { opacity: 1; transform: scale(1); filter: blur(0); }
 }
 
 .kk-lb-in {
@@ -228,7 +231,7 @@ img {
 }
 
 .kk-lb-img {
-  animation: kkLbImgIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+  animation: kkLbImgIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -272,6 +275,24 @@ img {
 .button:active,
 .btn-cta:active {
   transform: translateY(0px);
+}
+
+.ps-button::after,
+.button::after,
+.btn-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, 0.28) 50%, transparent 82%);
+  transform: translateX(-130%);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.ps-button:hover::after,
+.button:hover::after,
+.btn-cta:hover::after {
+  transform: translateX(130%);
 }
 
 /* ─────────────────────────────────────────────────────────────────
