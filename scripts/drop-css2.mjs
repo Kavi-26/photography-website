@@ -1,0 +1,10 @@
+import fs from 'fs';
+const theme = fs.readFileSync(process.env.TEMP + '/theme8.css', 'utf8');
+const i = theme.indexOf('.element-header-menu .header-menu__dropdown{backface');
+console.log(theme.slice(i, i + 2200));
+console.log('\n\n==== SECONDARY TAIL');
+const j = theme.indexOf('header-menu__dropdown-nav .header-menu__secondary{word-wrap');
+console.log(theme.slice(j, j + 900));
+const html = fs.readFileSync(process.env.TEMP + '/kk-home.html', 'utf8');
+const a = html.indexOf('--sub-navigation_font-size:');
+console.log('\nVARS', html.slice(a, a + 500));

@@ -190,3 +190,122 @@ img {
 .lightbox-close:hover {
   opacity: 1;
 }
+
+/* ─────────────────────────────────────────────────────────────────
+   MASONRY IMAGE ANIMATIONS
+   ───────────────────────────────────────────────────────────────── */
+
+/* Masonry images: hover zoom */
+.masonry .masonry-img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.5s ease !important;
+  transform-origin: center;
+}
+
+.masonry .masonry-img:hover {
+  transform: scale(1.025) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+  z-index: 2;
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   LIGHTBOX ANIMATION
+   ───────────────────────────────────────────────────────────────── */
+
+@keyframes kkLbOverlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes kkLbImgIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.kk-lb-in {
+  animation: kkLbOverlayIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.kk-lb-img {
+  animation: kkLbImgIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   PAGE BANNER STAGGERED ENTRY
+   ───────────────────────────────────────────────────────────────── */
+
+.page-banner .copy h1 {
+  animation: kkHeroTitle 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.page-banner .copy p {
+  animation: kkHeroTitle 1s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+@keyframes kkHeroTitle {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   BUTTON HOVER MICRO-ANIMATION
+   ───────────────────────────────────────────────────────────────── */
+
+.ps-button,
+.button,
+.btn-cta {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.35s ease,
+              transform 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.ps-button:hover,
+.button:hover,
+.btn-cta:hover {
+  transform: translateY(-2px);
+}
+
+.ps-button:active,
+.button:active,
+.btn-cta:active {
+  transform: translateY(0px);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   FOOTER INSTAGRAM ROW HOVER
+   ───────────────────────────────────────────────────────────────── */
+
+.ig-row a {
+  overflow: hidden;
+  display: block;
+}
+
+.ig-row a img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.5s ease;
+}
+
+.ig-row a:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.05);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SCROLL PROGRESS BAR
+   ───────────────────────────────────────────────────────────────── */
+
+#kk-scroll-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--primary-headings);
+  z-index: 99998;
+  width: 0%;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
