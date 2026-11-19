@@ -11,7 +11,7 @@ const SELECTOR = [
   '.eyebrow', '.kicker', '.reasons-kicker',
   '.pull', '.blog-card', '.feature', '.price-row',
   '.faq-row', '.faq-rule', '.step', '.package', '.reason',
-  '.links-row > a', '.ig-handle', '.socials a', '.to-top',
+  '.links-row > a', '.ig-handle',
   '.foot-item > a', '.foot-item > span',
   '.story-nav', '.pager',
 ].join(',');
@@ -28,8 +28,9 @@ function getAnimType(el) {
 }
 
 function eligible(el) {
-  if (el.closest('.kk-menu, .kk-overlay, .hero-slide, .tint, .lightbox-overlay, .foot-item ul, .kk-logo')) return false;
+  if (el.closest('.kk-menu, .kk-overlay, .hero-slide, .tint, .lightbox-overlay, .foot-item ul, .kk-logo, .foot-bottom')) return false;
   if (el.closest('.hero') && !el.closest('.hero-copy')) return false;
+  if (el.matches('.deco') || el.closest('.deco')) return false;
   if (el.matches('small') && el.closest('figcaption, .links-row')) return false;
   if (el.matches('input, textarea, select') && el.closest('label')) return false;
   if (el.tagName === 'A' && el.querySelector('img, h1, h2, h3')) return false;
@@ -79,7 +80,7 @@ function initParallax() {
     document.querySelectorAll('.about-photo img').forEach((el) => {
       if (!elements.has(el)) elements.set(el, { rate: 0.08, scale: 1.04 });
     });
-    document.querySelectorAll('.deco').forEach((el) => {
+    document.querySelectorAll('.deco:not(.deco-quote)').forEach((el) => {
       if (!elements.has(el)) elements.set(el, { rate: 0.06, scale: 1.06 });
     });
   };

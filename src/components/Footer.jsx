@@ -41,8 +41,18 @@ export default function Footer() {
       </div>
       <nav className="foot-nav">
         {footerNav.map((item) => (
-          <div className="foot-item" key={item.label}>
-            {item.to ? <Link to={item.to}>{item.label}</Link> : <span>{item.label}</span>}
+          <div className={`foot-item${item.dropdown ? ' has-drop' : ''}`} key={item.label}>
+            {item.to ? (
+              <Link to={item.to}>
+                {item.label}
+                {item.dropdown && <span className="foot-caret" aria-hidden="true" />}
+              </Link>
+            ) : (
+              <span>
+                {item.label}
+                {item.dropdown && <span className="foot-caret" aria-hidden="true" />}
+              </span>
+            )}
             {item.dropdown && (
               <ul>
                 {item.dropdown.map((sub) => (
@@ -54,7 +64,10 @@ export default function Footer() {
         ))}
       </nav>
       <div className="foot-bottom">
-        <p>© 2026 Karakovan Photography</p>
+        <div className="foot-copy">
+          <span className="foot-mark" aria-hidden="true">P</span>
+          <p>© 2026 Karakovan Photography</p>
+        </div>
         <div className="socials">
           <a href="https://www.facebook.com/KaraKovanPhotography" target="_blank" rel="noreferrer" aria-label="Facebook"><FaFacebookF /></a>
           <a href="https://www.instagram.com/karakovan_photography/" target="_blank" rel="noreferrer" aria-label="Instagram"><FaInstagram /></a>
