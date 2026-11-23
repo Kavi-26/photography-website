@@ -191,6 +191,54 @@ img {
   opacity: 1;
 }
 
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 1.8rem;
+  line-height: 1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+  transition: background 0.2s, transform 0.2s, opacity 0.2s;
+  backdrop-filter: blur(4px);
+  user-select: none;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.lightbox-prev {
+  left: 28px;
+}
+
+.lightbox-next {
+  right: 28px;
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 24px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.875rem;
+  letter-spacing: 0.18em;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 6px 16px;
+  border-radius: 20px;
+  user-select: none;
+  z-index: 10000;
+}
+
 /* ─────────────────────────────────────────────────────────────────
    MASONRY IMAGE ANIMATIONS
    ───────────────────────────────────────────────────────────────── */

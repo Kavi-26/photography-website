@@ -15,7 +15,7 @@ export default function CallToAction({
 }) {
   return (
     <section id={id} className={`banner ${short ? 'short' : ''} ${flush ? 'edge' : ''} ${align === 'split' ? 'offer' : ''} ${align === 'title' ? 'title-left' : ''} ${align === 'aside' ? 'aside' : ''}`}>
-      <img src={image} alt="" style={{ objectPosition: position }} />
+      <img src={image} alt={title || "Karakovan Photography"} loading="lazy" style={{ objectPosition: position }} />
       <div className="tint" />
       <div className="banner-copy">
         <h1>{title}</h1>

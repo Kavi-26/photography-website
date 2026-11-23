@@ -1,4 +1,17 @@
 {
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/elopements", "destination": "/food", "permanent": true },
+    { "source": "/adventure", "destination": "/equestrian", "permanent": true },
+    { "source": "/weddings/", "destination": "/weddings", "permanent": true },
+    { "source": "/couples/", "destination": "/couples", "permanent": true },
+    { "source": "/portfolio/", "destination": "/portfolio", "permanent": true },
+    { "source": "/about/", "destination": "/about", "permanent": true },
+    { "source": "/contact/", "destination": "/contact", "permanent": true },
+    { "source": "/experience/", "destination": "/experience", "permanent": true },
+    { "source": "/investment/", "destination": "/investment", "permanent": true },
+    { "source": "/blog/", "destination": "/blog", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

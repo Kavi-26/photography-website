@@ -2,15 +2,14 @@ import { Link } from 'react-router-dom';
 import CallToAction from '../components/CallToAction';
 import QuickLinks from '../components/QuickLinks';
 
-const CDN = 'https://images-pw.pixieset.com';
-const portrait = `${CDN}/elementfield/lRJa4EO/KAR03134-36c05ac8-2500.jpg`;
+const portrait = '/photos/Experience/KAR03134-36c05ac8-2500.jpg';
 const reasons = [
-  { title: '01. Double Backup, Zero Compromise', image: `${CDN}/elementfield/odJweQ3/1_Double_Bakcup-34cf4600-2500.png`, text: 'As professionals, we prioritize the safety of your memories. We always carry backup cameras and storage systems to ensure your data is secure. During shoots, your photos are simultaneously saved on two memory cards and later backed up onto two separate storage devices until delivery. With this meticulous approach, we’re proud to say we’ve never experienced data loss—your moments are in the safest hands.' },
-  { title: '02. On Schedule, Every Time', image: `${CDN}/elementfield/lRJa43V/1_OnTimeScheudle-85b31b9c-2500.png`, text: 'We don’t just serve—we deliver with passion and precision! Whether it’s arriving on shoot location or handing over the final deliverables, we pride ourselves on sticking to the schedule, a streak we’ve maintained for a long time. On the rare occasion that we need extra time to perfect our work, we’ll always be transparent with you. Why? Because finishing what we start is our top priority—no matter what it takes.' },
-  { title: '03. Polished Professionals', image: `${CDN}/elementfield/vwVzMaL/1_PolishedProfessional-fd76f3e1-2500.png`, text: 'Our team is experienced, professional, and courteous. We don’t just work behind the scenes—we’re right there with you, in your space, on your special day, capturing moments surrounded by your loved ones. That’s why, We dress appropriately and maintain the highest standards of professionalism to ensure we fit seamlessly into your celebration. If you have any particular dress code, we adhere to it to the T.' },
-  { title: '04. Digitalised, All the Way', image: `${CDN}/elementfield/bk039Je/1_Digitalaized-d5ffaee9-2500.png`, text: 'We ensure our customers never have to deal with tedious or time-consuming tasks—whether it’s downloading photos, selecting images for an album, or providing feedback on album designs. We’ve made everything digital, allowing you to handle it all in the simplest way possible, at your own availability of time. It’s straightforward, reliable, and completely digitised for your convenience.' },
-  { title: '05. Not just an Album, its an Album', image: `${CDN}/elementfield/xXOKW0l/1_Notjustalbum-41f9f7c4-2500.png`, text: 'We believe that if photos are the food, then albums are the serving platters. No matter how stunning the photos are, if they’re not presented right, they won’t do justice to your memories. That’s why we’re committed to printing in only one way—the premium way. Our albums are designed to lay flat on every page, ensuring no spine cut runs through the middle of your cherished moments. This creates a seamless, wide canvas for us to beautifully design your unforgettable memories.' },
-  { title: '06. Apples & Oranges', image: `${CDN}/elementfield/roJ9lqe/1_ApplesandOranges-2ec2e938-2500.png`, text: 'Choosing a photographer isn’t about counting photos—it’s about the craft behind them.\n\nTwo photographers may offer "8 hours of coverage" or “200 edited images," just as apples and oranges are both fruit. But bite in, and the difference is clear. What matters isn’t the quantity, but the care, vision, and skill shaping your gallery.\n\nSo don’t just compare specs. Compare artistry. Because your memories deserve more than a checklist—they deserve meaning.', rich: true },
+  { title: '01. Double Backup, Zero Compromise', image: '/photos/Experience/1_Double_Bakcup-34cf4600-2500.png', text: 'As professionals, we prioritize the safety of your memories. We always carry backup cameras and storage systems to ensure your data is secure. During shoots, your photos are simultaneously saved on two memory cards and later backed up onto two separate storage devices until delivery. With this meticulous approach, we’re proud to say we’ve never experienced data loss—your moments are in the safest hands.' },
+  { title: '02. On Schedule, Every Time', image: '/photos/Experience/1_OnTimeScheudle-85b31b9c-2500.png', text: 'We don’t just serve—we deliver with passion and precision! Whether it’s arriving on shoot location or handing over the final deliverables, we pride ourselves on sticking to the schedule, a streak we’ve maintained for a long time. On the rare occasion that we need extra time to perfect our work, we’ll always be transparent with you. Why? Because finishing what we start is our top priority—no matter what it takes.' },
+  { title: '03. Polished Professionals', image: '/photos/Experience/1_PolishedProfessional-fd76f3e1-2500.png', text: 'Our team is experienced, professional, and courteous. We don’t just work behind the scenes—we’re right there with you, in your space, on your special day, capturing moments surrounded by your loved ones. That’s why, We dress appropriately and maintain the highest standards of professionalism to ensure we fit seamlessly into your celebration. If you have any particular dress code, we adhere to it to the T.' },
+  { title: '04. Digitalised, All the Way', image: '/photos/Experience/1_Digitalaized-d5ffaee9-2500.png', text: 'We ensure our customers never have to deal with tedious or time-consuming tasks—whether it’s downloading photos, selecting images for an album, or providing feedback on album designs. We’ve made everything digital, allowing you to handle it all in the simplest way possible, at your own availability of time. It’s straightforward, reliable, and completely digitised for your convenience.' },
+  { title: '05. Not just an Album, its an Album', image: '/photos/Experience/1_Notjustalbum-41f9f7c4-2500.png', text: 'We believe that if photos are the food, then albums are the serving platters. No matter how stunning the photos are, if they’re not presented right, they won’t do justice to your memories. That’s why we’re committed to printing in only one way—the premium way. Our albums are designed to lay flat on every page, ensuring no spine cut runs through the middle of your cherished moments. This creates a seamless, wide canvas for us to beautifully design your unforgettable memories.' },
+  { title: '06. Apples & Oranges', image: '/photos/Experience/1_ApplesandOranges-2ec2e938-2500.png', text: 'Choosing a photographer isn’t about counting photos—it’s about the craft behind them.\n\nTwo photographers may offer "8 hours of coverage" or “200 edited images," just as apples and oranges are both fruit. But bite in, and the difference is clear. What matters isn’t the quantity, but the care, vision, and skill shaping your gallery.\n\nSo don’t just compare specs. Compare artistry. Because your memories deserve more than a checklist—they deserve meaning.', rich: true },
 ];
 
 const faqs = [
@@ -30,7 +29,7 @@ export default function ExperiencePage() {
         <div className="about-tease">
           <div className="about-photo">
             <span />
-            <img src={portrait} alt="" style={{ objectPosition: '59% 10%' }} />
+            <img src={portrait} alt="Kharthik - Karakovan Photography" loading="lazy" style={{ objectPosition: '59% 10%' }} />
           </div>
           <div className="about-copy flush">
             <h5>i’m the person behind the camera</h5>
@@ -48,45 +47,42 @@ export default function ExperiencePage() {
         </div>
       </section>
       <section className="section">
-        <div className="reason-grid icons">
-          {reasons.map((item) => (
-            <article className="reason" key={item.title}>
-              <img src={item.image} alt="" />
-              <div>
-                <h3>{item.title}</h3>
-                <p style={{ whiteSpace: 'pre-line' }}>
-                  {item.rich ? (
-                    <>
-                      Choosing a photographer isn’t about counting photos—it’s about the <em>craft</em> behind them.
-                      {'\n\n'}
-                      Two photographers may offer &quot;8 hours of coverage&quot; or “200 edited images,&quot; just as apples and oranges are both fruit. But bite in, and the difference is clear. What matters isn’t the quantity, but the <em>care, vision, and skill</em> shaping your gallery.
-                      {'\n'}
-                      So don’t just compare specs. Compare artistry. Because your memories deserve more than a checklist—they deserve <em>meaning</em>.
-                    </>
-                  ) : item.text}
-                </p>
+        <div className="reasons-grid">
+          {reasons.map((r) => (
+            <div key={r.title} className="reason-card">
+              <div className="reason-img">
+                <img src={r.image} alt={r.title} loading="lazy" />
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="faq-board">
-        <h2>FAQ</h2>
-        <div className="faq-cols">
-          {[faqs.slice(0, 3), faqs.slice(3)].map((column) => (
-            <div key={column[0].q}>
-              {column.map((item) => (
-                <details key={item.q}>
-                  <summary>{item.q}</summary>
-                  <p>{item.a}</p>
-                </details>
-              ))}
+              <div className="reason-body">
+                <h3>{r.title}</h3>
+                {r.rich ? (
+                  r.text.split('\n\n').map((para, i) => <p key={i}>{para}</p>)
+                ) : (
+                  <p>{r.text}</p>
+                )}
+              </div>
             </div>
           ))}
         </div>
       </section>
-      <CallToAction title="Are you ready for your Adventure? Let’s do it !" subtitle="" cta="Contact Me" image={`${CDN}/elementfield/yr1Jv0e/Arshadxnyla633of886-5973a022-2500.jpg`} position="50% 20%" />
-      <QuickLinks />
+      <CallToAction
+        image="/photos/Home/776A7603-fb8e3aae-2500.jpg"
+        title="We are based in Coimbatore, Tamilnadu."
+        subtitle="Available worldwide."
+        cta="Say Hello"
+      />
+      <section className="faq-wrap">
+        <h2>Frequently Asked Questions</h2>
+        <div className="faq-list">
+          {faqs.map((f) => (
+            <details key={f.q}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+      <QuickLinks current="experience" />
     </article>
   );
 }
