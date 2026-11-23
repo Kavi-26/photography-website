@@ -10,8 +10,8 @@ const items = [
     dropdown: [
       { label: 'Couple Portraits/ Pre wedding', to: '/couples' },
       { label: 'Weddings/ Reception', to: '/weddings' },
-      { label: 'Food Photography', to: '/elopements' },
-      { label: 'Equestrian Photography', to: '/adventure' },
+      { label: 'Food Photography', to: '/food' },
+      { label: 'Equestrian Photography', to: '/equestrian' },
     ],
   },
   {
