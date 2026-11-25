@@ -35,6 +35,7 @@ export default function Navbar() {
   const overlay = location.pathname === '/' || onPost;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
     setExpanded(null);
   }, [location.pathname]);

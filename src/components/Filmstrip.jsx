@@ -7,7 +7,6 @@ export default function Filmstrip({ images = [], fit = 'cover' }) {
   const [isOpen, setIsOpen] = useState(false);
   const thumbsRef = useRef(null);
 
-  if (!images.length) return null;
   const go = (dir) => setIndex((i) => (i + dir + images.length) % images.length);
 
   // Preload adjacent images (previous and next) so switching is instantaneous with 0 loading flicker
@@ -66,6 +65,8 @@ export default function Filmstrip({ images = [], fit = 'cover' }) {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [images.length, isOpen]);
+
+  if (!images.length) return null;
 
   return (
     <section className={`film ${fit}`}>

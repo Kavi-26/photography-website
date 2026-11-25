@@ -1,8 +1,26 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { home } from '../data/images';
 
 const pad = (n) => String(n).padStart(2, '0');
+
+const storyMetadata = {
+  '/photos/Home/MAN00644-072ee881-2500.jpg': { ratio: '2500 / 1873', orientation: 'landscape' },
+  '/photos/Home/MAN00233-62819a04-2500.jpg': { ratio: '2500 / 1667', orientation: 'landscape' },
+  '/photos/Home/5A1A6721-0d7e0cfb-2500.jpg': { ratio: '2500 / 3750', orientation: 'portrait' },
+  '/photos/Home/028A0192-4c0a8cb9-2500.jpg': { ratio: '2500 / 3750', orientation: 'portrait' },
+  '/photos/Home/028A0169-Edit-bebd0e4a-2500.jpg': { ratio: '2500 / 3750', orientation: 'portrait' },
+  '/photos/Home/MAN00040-45acf169-2500.jpg': { ratio: '2500 / 3750', orientation: 'portrait' },
+  '/photos/Home/MAN00207-58755676-2500.jpg': { ratio: '2500 / 1667', orientation: 'landscape' },
+  '/photos/Home/SBM04621-0ab6774d-2500.jpg': { ratio: '2500 / 1667', orientation: 'landscape' },
+  '/photos/Home/DSC3313-14819235-2500.jpg': { ratio: '2500 / 1667', orientation: 'landscape' },
+  '/photos/Home/DSC3778_a-dfc1beb6-2500.jpg': { ratio: '2500 / 3820', orientation: 'portrait' },
+  '/photos/Home/MAN01218-8d441ee0-2500.jpg': { ratio: '2500 / 1667', orientation: 'landscape' },
+  '/photos/Home/abisha02-3-f458a355-2500.jpg': { ratio: '2500 / 3749', orientation: 'portrait' },
+  '/photos/Home/bbc6f29e0faf4312fdc1854ec0575eb5-3212612b-2500.jpg': { ratio: '2500 / 3750', orientation: 'portrait' },
+  '/photos/Home/NIR00694-2a81ccdd-2500.jpg': { ratio: '2500 / 1667', orientation: 'landscape' },
+  '/photos/Home/53bd6702406087a367287755c0a9e729-c0a5e3d8-2500.jpg': { ratio: '2500 / 1288', orientation: 'landscape' },
+};
 
 export default function LoveStories() {
   const photos = home.stories;
@@ -10,8 +28,29 @@ export default function LoveStories() {
   const loop = [...photos, ...photos, ...photos];
   const [cursor, setCursor] = useState(total);
   const [anim, setAnim] = useState(true);
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [trackOffset, setTrackOffset] = useState(null);
   const sectionRef = useRef(null);
+  const trackRef = useRef(null);
   const shown = ((cursor % total) + total) % total;
+
+  const updatePosition = (index) => {
+    if (!trackRef.current) return;
+    const btn = trackRef.current.children[index];
+    if (!btn) return;
+    const center = btn.offsetLeft + btn.offsetWidth / 2;
+    setTrackOffset((window.innerWidth / 2) - center);
+  };
+
+  useLayoutEffect(() => {
+    updatePosition(cursor);
+  }, [cursor]);
+
+  useEffect(() => {
+    const handleResize = () => updatePosition(cursor);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [cursor]);
 
   useEffect(() => {
     if (cursor >= total && cursor < total * 2) return undefined;
@@ -33,7 +72,19 @@ export default function LoveStories() {
     setCursor(next);
   };
 
-  // Keyboard navigation with Left / Right arrow keys
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (lightboxIndex === null) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightboxIndex(null);
+      if (e.key === 'ArrowLeft') setLightboxIndex((i) => (i - 1 + total) % total);
+      if (e.key === 'ArrowRight') setLightboxIndex((i) => (i + 1) % total);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightboxIndex, total]);
+
+  // Keyboard navigation with Left / Right arrow keys for slider
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -50,7 +101,6 @@ export default function LoveStories() {
       const visibleBottom = Math.min(vHeight, rect.bottom);
       const visibleHeight = Math.max(0, visibleBottom - visibleTop);
 
-      // Trigger if this section is actively viewed or focused
       const mid = vHeight / 2;
       const crossesMid = rect.top <= mid && rect.bottom >= mid;
       const isFocused = sectionRef.current.contains(document.activeElement);
@@ -79,20 +129,42 @@ export default function LoveStories() {
         </div>
         <div className="story-film">
           <div
+            ref={trackRef}
             className={`story-track${anim ? '' : ' instant'}`}
-            style={{ transform: 'translateX(calc(50vw - var(--film-stride) * ' + cursor + ' - var(--film-slide) / 2))' }}
+            style={{
+              transform: trackOffset !== null ? `translateX(${trackOffset}px)` : undefined,
+            }}
           >
-            {loop.map((src, i) => (
-              <button
-                key={`${i}-${src}`}
-                type="button"
-                className={i === cursor ? 'on' : ''}
-                aria-label={i === cursor ? 'Current story' : 'Show this story'}
-                onClick={() => { if (i !== cursor) go(i); }}
-              >
-                <img src={src} alt="" />
-              </button>
-            ))}
+            {loop.map((src, i) => {
+              const meta = storyMetadata[src] || { ratio: '3 / 2', orientation: 'landscape' };
+              const isCurrent = i === cursor;
+              return (
+                <button
+                  key={`${i}-${src}`}
+                  type="button"
+                  className={`${isCurrent ? 'on' : ''} is-${meta.orientation}`}
+                  style={{ aspectRatio: meta.ratio }}
+                  aria-label={isCurrent ? 'View full image' : 'Show this story'}
+                  title={isCurrent ? 'Click to view full image' : undefined}
+                  onClick={() => {
+                    if (!isCurrent) {
+                      go(i);
+                    } else {
+                      setLightboxIndex(shown);
+                    }
+                  }}
+                >
+                  <img
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    onLoad={() => {
+                      if (isCurrent) updatePosition(cursor);
+                    }}
+                  />
+                </button>
+              );
+            })}
           </div>
         </div>
         <div className="story-nav">
@@ -115,6 +187,46 @@ export default function LoveStories() {
           </button>
         </div>
       </section>
+
+      {lightboxIndex !== null && (
+        <div className="lightbox-overlay kk-lb-in" onClick={() => setLightboxIndex(null)}>
+          <button className="lightbox-close" type="button" aria-label="Close" onClick={() => setLightboxIndex(null)}>✕</button>
+          <button
+            className="lightbox-nav lightbox-prev"
+            type="button"
+            aria-label="Previous story"
+            title="Previous (←)"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((i) => (i - 1 + total) % total);
+            }}
+          >
+            ←
+          </button>
+          <img
+            key={lightboxIndex}
+            className="lightbox-content kk-lb-img"
+            src={photos[lightboxIndex]}
+            alt="Client story fullscreen"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            className="lightbox-nav lightbox-next"
+            type="button"
+            aria-label="Next story"
+            title="Next (→)"
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxIndex((i) => (i + 1) % total);
+            }}
+          >
+            →
+          </button>
+          <div className="lightbox-counter" onClick={(e) => e.stopPropagation()}>
+            {pad(lightboxIndex + 1)} / {pad(total)}
+          </div>
+        </div>
+      )}
     </>
   );
 }
